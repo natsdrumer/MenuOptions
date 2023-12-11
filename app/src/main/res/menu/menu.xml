@@ -3,12 +3,12 @@
 
     <item
         android:id="@+id/contac"
-        android:title="Contactos"
+        android:title="@string/menu_contact"
         />
 
     <item
         android:id="@+id/settings"
-        android:title="Settings"
+        android:title="@string/menu_set"
         />
 
 

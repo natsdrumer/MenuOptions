@@ -1,3 +1,13 @@
 <resources>
     <string name="app_name">Contact</string>
+    <string name="menu_contact">Contacts</string>
+    <string name="menu_set">Settings</string>
+    <string name="register">Register</string>
+    <string name="name">Name</string>
+    <string name="number">Number</string>
+    <string name="regisOK">Contacto registrado com sucesso</string>
+    <string name="editOK">Contacto editado com sucesso</string>
+    <string name="menu_back">Back</string>
+    <string name="edit">Edit</string>
+    <string name="delete">Delete</string>
 </resources>
