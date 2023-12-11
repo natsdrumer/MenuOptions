@@ -2,8 +2,10 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
     <item
         android:id="@+id/back"
-        android:title="@string/menu_back"/>
+        android:title="@string/menu_back"
+        android:icon="@drawable/baseline_arrow_back_24"/>
     <item
         android:id="@+id/set"
-        android:title="@string/menu_set"/>
+        android:title="@string/menu_set"
+        android:icon="@drawable/baseline_settings_24"/>
 </menu>

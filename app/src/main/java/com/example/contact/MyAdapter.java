@@ -31,6 +31,8 @@ public class MyAdapter extends RecyclerView.Adapter<MyViewHolder> {
         this.contactos = contactos;
     }
 
+    private int position;
+
     @NonNull
     @Override
     public MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -41,9 +43,17 @@ public class MyAdapter extends RecyclerView.Adapter<MyViewHolder> {
     public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
 
 
-        //holder.nameview.setText(contactos.get(position).getName());
-        //holder.numberview.setText(contactos.get(position).getNumber());
-        //holder.imageView.setImageResource(contactos.get(position).getImage());
+        holder.nameview.setText(contactos.get(position).getName());
+        holder.numberview.setText(contactos.get(position).getNumber());
+        holder.imageView.setImageResource(contactos.get(position).getImage());
+
+        holder.itemView.setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View view) {
+                setPosition(holder.getAdapterPosition());
+                return false;
+            }
+        });
 
 
     }
@@ -52,4 +62,13 @@ public class MyAdapter extends RecyclerView.Adapter<MyViewHolder> {
     public int getItemCount() {
         return contactos.size();
     }
+
+    public int getPosition() {
+        return position;
+    }
+
+    public void setPosition(int position) {
+        this.position = position;
+    }
 }
+
