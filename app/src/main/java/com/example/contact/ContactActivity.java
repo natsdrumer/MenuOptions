@@ -1,47 +1,25 @@
 package com.example.contact;
 
-import static com.google.android.material.snackbar.BaseTransientBottomBar.LENGTH_LONG;
-
-import android.app.AlertDialog;
-import android.app.Dialog;
-import android.content.DialogInterface;
+import android.app.Activity;
 import android.content.Intent;
-import android.graphics.Canvas;
 import android.os.Bundle;
 import android.provider.Settings;
-import android.view.ContextMenu;
 import android.view.Menu;
-import android.view.MenuInflater;
 import android.view.MenuItem;
-import android.view.View;
-import android.widget.Button;
-import android.widget.EditText;
-import android.widget.RelativeLayout;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
-import androidx.core.content.ContextCompat;
-import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
-import com.google.android.material.snackbar.BaseTransientBottomBar;
-import com.google.android.material.snackbar.Snackbar;
-
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Collections;
-import java.util.List;
+import com.example.contact.utils.Comon;
 
 
 public class ContactActivity extends AppCompatActivity {
-
-    List<User> contactos = new ArrayList<>();
-    MyAdapter adapter = new MyAdapter(this, contactos);
+    MyAdapter adapter = new MyAdapter(this, Comon.contactos);
 
     //RecyclerView recyclerView2 = findViewById(R.id.recyclerview);
     @Override
@@ -53,9 +31,7 @@ public class ContactActivity extends AppCompatActivity {
         RecyclerView recyclerView = findViewById(R.id.recyclerview);
         registerForContextMenu(recyclerView);
 
-        contactos.add(new User("natanael", "9510452", R.drawable.baseline_person_24));
-        contactos.add(new User("fernando", "9510452", R.drawable.baseline_person_24));
-        contactos.add(new User("claudio", "9510452", R.drawable.baseline_person_24));
+
 
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         recyclerView.setAdapter(adapter);
@@ -67,15 +43,15 @@ public class ContactActivity extends AppCompatActivity {
             String number = getIntent().getStringExtra("number");
             User user = new User(name, number,R.drawable.baseline_person_24);
             if(getIntent().hasExtra("position")){
-                int position = getIntent().getIntExtra("position", contactos.size()-1);
-                contactos.add(position, user);
+                int position = getIntent().getIntExtra("position", Comon.contactos.size()-1);
+                Comon.contactos.add(position, user);
                 adapter.notifyItemInserted(position);
             }else {
-                contactos.add(user);
-                if (contactos.size() == 0) {
+                Comon.contactos.add(user);
+                if (Comon.contactos.size() == 0) {
                     adapter.notifyItemInserted(0);
                 } else {
-                    adapter.notifyItemInserted(contactos.size() - 1);
+                    adapter.notifyItemInserted(Comon.contactos.size() - 1);
                 }
             }
         }
@@ -158,10 +134,8 @@ public class ContactActivity extends AppCompatActivity {
 
     public void editContact(){
         int position = adapter.getPosition();
-        String name = contactos.get(position).name;
-        String number = contactos.get(position).number;
-        contactos.remove(position);
-        adapter.notifyItemRemoved(position);
+        String name = Comon.contactos.get(position).name;
+        String number = Comon.contactos.get(position).number;
         String title = "Edit";
         Intent intent = new Intent(this, MainActivity.class);
         intent.putExtra("name", name);
@@ -173,22 +147,27 @@ public class ContactActivity extends AppCompatActivity {
 
     }
 
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if (requestCode == 1){
+            if(resultCode == Activity.RESULT_OK) {
+                int position = data.getIntExtra("position", 0);
+                adapter.notifyItemChanged(position);
+                Toast.makeText(getApplicationContext(),"OK",Toast.LENGTH_LONG);
+            }
+        }
+    }
+
     public void deleteContact(){
         int position = adapter.getPosition();
-        contactos.remove(position);
+        Comon.contactos.remove(position);
         adapter.notifyItemRemoved(position);
 
     }
 
-public void register(String name, String number){
-    User user = new User(name, number,R.drawable.baseline_person_24);
-    contactos.add(user);
-    if (contactos.size() == 0){
-        adapter.notifyItemInserted(0);
-    }else {
-        adapter.notifyItemInserted(contactos.size() - 1);
-    }
-}
+
 
 
 }

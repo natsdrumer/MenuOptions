@@ -20,7 +20,7 @@ import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
-
+import com.example.contact.utils.Comon;
 public class MainActivity extends AppCompatActivity {
 
     TextView title;
@@ -69,15 +69,14 @@ public class MainActivity extends AppCompatActivity {
                        number = etNumber.getText().toString();
                        //contactActivity.register(name, number);
 
+                       Comon.contactos.get(position).setName(name);
+                       Comon.contactos.get(position).setNumber(number);
                        Intent intent = new Intent(getApplicationContext(), ContactActivity.class);
-                       intent.putExtra("name", name);
-                       intent.putExtra("number", number);
-                       intent.putExtra("position", position);
-                       startActivity(intent);
-                       Toast.makeText(getApplicationContext(), R.string.regisOK, LENGTH_LONG).show();
+
 
                        etName.setText("");
                        etNumber.setText("");
+                       startActivity(intent);
                    }
 
                }
@@ -99,10 +98,7 @@ public class MainActivity extends AppCompatActivity {
                     number = etNumber.getText().toString();
                     //contactActivity.register(name, number);
 
-                    Intent intent = new Intent(getApplicationContext(), ContactActivity.class);
-                    intent.putExtra("name", name);
-                    intent.putExtra("number", number);
-                    startActivity(intent);
+                    Comon.contactos.add(new User(name, number, R.drawable.baseline_person_24));
                     Toast.makeText(getApplicationContext(), R.string.regisOK, LENGTH_LONG).show();
 
                     etName.setText("");
@@ -134,17 +130,6 @@ public class MainActivity extends AppCompatActivity {
         }else {
             return false;
         }
-
-        /*switch (item.getItemId()){
-            case R.id.actions_contact:
-                showContact();
-                return true;
-            case 2:
-                showSettings();
-                return true;
-            default:
-                return super.onOptionsItemSelected(item);
-        }*/
     }
 
     public void showContact(){
