@@ -10,7 +10,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.provider.Settings;
 import android.view.Menu;
-import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
@@ -18,8 +17,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import java.util.ArrayList;
-import java.util.List;
+import com.example.contact.model.User;
 import com.example.contact.utils.Comon;
 public class MainActivity extends AppCompatActivity {
 
@@ -69,8 +67,9 @@ public class MainActivity extends AppCompatActivity {
                        number = etNumber.getText().toString();
                        //contactActivity.register(name, number);
 
-                       Comon.contactos.get(position).setName(name);
-                       Comon.contactos.get(position).setNumber(number);
+                       //Comon.contactos.get(position).setName(name);
+                       //Comon.contactos.get(position).setNumber(number);
+
                        Intent intent = new Intent(getApplicationContext(), ContactActivity.class);
 
 
@@ -98,7 +97,7 @@ public class MainActivity extends AppCompatActivity {
                     number = etNumber.getText().toString();
                     //contactActivity.register(name, number);
 
-                    Comon.contactos.add(new User(name, number, R.drawable.baseline_person_24));
+                    //Comon.contactos.add(new User(name, number, R.drawable.baseline_person_24));
                     Toast.makeText(getApplicationContext(), R.string.regisOK, LENGTH_LONG).show();
 
                     etName.setText("");

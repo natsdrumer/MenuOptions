@@ -15,10 +15,13 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.contact.db.MyDataSource;
+import com.example.contact.model.User;
 import com.example.contact.utils.Comon;
 
 
 public class ContactActivity extends AppCompatActivity {
+    private MyDataSource dataSource;
     MyAdapter adapter = new MyAdapter(this, Comon.contactos);
 
     //RecyclerView recyclerView2 = findViewById(R.id.recyclerview);
@@ -31,6 +34,9 @@ public class ContactActivity extends AppCompatActivity {
         RecyclerView recyclerView = findViewById(R.id.recyclerview);
         registerForContextMenu(recyclerView);
 
+        dataSource = new MyDataSource(this);
+        dataSource.open();
+
 
 
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
@@ -38,7 +44,7 @@ public class ContactActivity extends AppCompatActivity {
 
 
 
-        if(getIntent().hasExtra("name") && getIntent().hasExtra("number")){
+      /*  if(getIntent().hasExtra("name") && getIntent().hasExtra("number")){
             String name = getIntent().getStringExtra("name");
             String number = getIntent().getStringExtra("number");
             User user = new User(name, number,R.drawable.baseline_person_24);
@@ -54,7 +60,7 @@ public class ContactActivity extends AppCompatActivity {
                     adapter.notifyItemInserted(Comon.contactos.size() - 1);
                 }
             }
-        }
+        }*/
 
 
 
@@ -134,8 +140,8 @@ public class ContactActivity extends AppCompatActivity {
 
     public void editContact(){
         int position = adapter.getPosition();
-        String name = Comon.contactos.get(position).name;
-        String number = Comon.contactos.get(position).number;
+        String name = Comon.contactos.get(position).getName();
+        String number = Comon.contactos.get(position).getNumber();
         String title = "Edit";
         Intent intent = new Intent(this, MainActivity.class);
         intent.putExtra("name", name);

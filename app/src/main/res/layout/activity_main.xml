@@ -35,19 +35,25 @@
             android:id="@+id/etName"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginTop="50dp"
             android:ems="10"
-            android:inputType="text"
             android:hint="@string/name"
-            android:layout_marginTop="50dp"/>
+            android:inputType="text"
+            android:minHeight="48dp"
+            android:autofillHints=""
+            tools:ignore="VisualLintTextFieldSize" />
 
         <EditText
             android:id="@+id/etNumber"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginTop="25dp"
             android:ems="10"
-            android:inputType="phone"
             android:hint="@string/number"
-            android:layout_marginTop="25dp"/>
+            android:inputType="phone"
+            android:minHeight="48dp"
+            android:importantForAutofill="no"
+            tools:ignore="VisualLintTextFieldSize" />
 
         <Button
             android:id="@+id/btn"

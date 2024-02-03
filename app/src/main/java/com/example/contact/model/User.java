@@ -1,8 +1,9 @@
-package com.example.contact;
+package com.example.contact.model;
 
 public class User {
-    String name;
-    String number;
+    private String name;
+    private String number;
+    private long id;
     int image;
 
     public User(String name, String number){
@@ -10,10 +11,11 @@ public class User {
         this.number = number;
     }
 
-    public User(String name, String number, int image){
+    public User(long id, String name, String number, int image){
         this.name = name;
         this.number = number;
-        this.image=image;
+        this.image = image;
+        this.id = id;
     }
 
     public String getName() {
@@ -26,6 +28,10 @@ public class User {
 
     public int getImage() {
         return image;
+    }
+
+    public long getId() {
+        return id;
     }
 
     public void setImage(int image) {
