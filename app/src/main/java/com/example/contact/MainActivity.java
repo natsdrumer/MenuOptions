@@ -61,7 +61,7 @@ public class MainActivity extends AppCompatActivity {
                    String number = "";
 
                    if(etName.getText().toString().equals("") || etNumber.getText().toString().equals("")) {
-                       Toast.makeText(getApplicationContext(),"Please Enter Contact Name and numebr", Toast.LENGTH_SHORT).show();
+                       Toast.makeText(getApplicationContext(),"Please Enter Contat Name and numebr", Toast.LENGTH_SHORT).show();
                    }else {
                        name = etName.getText().toString();
                        number = etNumber.getText().toString();
